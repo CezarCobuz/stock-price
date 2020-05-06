@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { observable } from 'mobx';
 import { observer } from 'mobx-react'
-import { ChartState, Chart } from './chart/chart';
+import { Chart } from './chart/chart';
+import { ChartState } from './chart/chart.state';
 
 class AppState {
   @observable
