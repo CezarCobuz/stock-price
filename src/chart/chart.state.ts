@@ -25,6 +25,8 @@ export class ChartState {
             stockFunction: "TIME_SERIES_MONTHLY", // TIME_SERIES_INTRADAY
         };
 
+        // <!> Limits to: 5 API requests per minute; 500 API requests per day
+        // https://www.alphavantage.co/premium/
         fetch(createAlphaVantageRequestInfo(config))
             .then((res) => {
                 return res.json();

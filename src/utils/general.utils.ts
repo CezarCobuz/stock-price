@@ -22,7 +22,6 @@ export const convertTimeSeries = (data: any): EasyTimeSeries[] => {
         result.push(item);
     });
 
-    console.log("+++ result", result);
     return result.reverse();
 };
 
@@ -38,3 +37,12 @@ export const createAlphaVantageRequestInfo = (
 
     return REQUEST_INFO;
 };
+
+export const computeAveragePrice = (stockData: EasyTimeSeries[]): number => {
+
+    let prices = stockData.map((value) => value.price)
+    let sum = prices.reduce((a, b) => a + b, 0)
+    let average = sum / stockData.length
+
+    return average
+}

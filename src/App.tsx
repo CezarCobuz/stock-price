@@ -38,9 +38,9 @@ export const App: React.FC<{ state: AppState }> = observer(({ state }) => {
                 state.chartState.stockData.length !== 0 && <DateInterval state={state.dateIntervalState} />
             }
 
-            <p>Stock Data length {state.chartState.stockData.length}</p>
             <p>Date interval selected {state.dateIntervalState.startDropdownState.value} -> {state.dateIntervalState.stopDropdownState.value}</p>
             <p>Date interval index {state.dateIntervalState.startDropdownState.valueIndex} -> {state.dateIntervalState.stopDropdownState.valueIndex}</p>
+            <p>Filtered Data length {state.dateIntervalState.stopDropdownState.valueIndex - state.dateIntervalState.startDropdownState.valueIndex}</p>
         </>
     )
 })
