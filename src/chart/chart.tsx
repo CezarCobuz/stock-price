@@ -13,13 +13,19 @@ import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts'
  * Overlay an average on the chart
  */
 export const Chart: React.FC<{ state: ChartState }> = observer(({ state }) => {
+    let stockData = state.stockData
+    // let stockData = pricesMock.slice(1, 10)
+    console.log('+++ stockData', stockData);
+
     return <>
         <Input state={state.userInputState} />
         <button onClick={() => state.fetchStock()}>Fetch Stock Data</button>
-        <LineChart width={500} height={300} data={pricesMock}>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+
+        <LineChart width={1000} height={300} data={stockData}>
+            <XAxis dataKey='date' />
+            <YAxis dataKey='price'/>
+            {/* <CartesianGrid stroke="#eee" strokeDasharray="5 5" /> */}
+
             <Line type="monotone" dataKey="date" stroke="#8884d8" />
             <Line type="monotone" dataKey="price" stroke="#82ca9d" />
         </LineChart>
