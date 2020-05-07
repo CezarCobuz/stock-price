@@ -30,8 +30,11 @@ export class DateIntervalState {
     setDateInterval = (indexStart: number, indexStop: number) => {
         if (indexStart < indexStop) {
             // FIXME: don't destroy original fetched stock data, refactor chart
-            appState.chartState.stockData = appState.chartState.stockData.slice(indexStart, indexStop)
+            // appState.chartState.stockData = appState.chartState.stockData.slice(indexStart, indexStop
+            appState.startIndex = indexStart
+            appState.endIndex = indexStop
         } else {
+            // TODO: Add a pretty warning component
             console.warn('Index of start date must be smaller then index of stop date')
         }
     }

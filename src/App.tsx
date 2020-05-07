@@ -12,6 +12,12 @@ class AppState {
 
     @observable
     dateIntervalState = new DateIntervalState()
+
+    @observable
+    startIndex = 0
+
+    @observable
+    endIndex = 0
 }
 
 export const appState = new AppState()
@@ -26,7 +32,7 @@ export const App: React.FC<{ state: AppState }> = observer(({ state }) => {
 
     return (
         <>
-            <Chart state={state.chartState} />
+            <Chart state={state.chartState} startIndex={state.startIndex} endIndex={state.endIndex} />
 
             {
                 state.chartState.stockData.length !== 0 && <DateInterval state={state.dateIntervalState} />

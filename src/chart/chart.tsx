@@ -5,14 +5,26 @@ import { ChartState } from './chart.state'
 
 // TODO: replace with real data after filtering
 import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip } from 'recharts'
+
+interface Props {
+    state: ChartState,
+    startIndex?: number,
+    endIndex?: number
+}
+
 /**
  * User provides a stock symbol
  * The price of the stock plotted on a chart
  * Customizable time period shown in the chart
  * Overlay an average on the chart
  */
-export const Chart: React.FC<{ state: ChartState }> = observer(({ state }) => {
+export const Chart: React.FC<Props> = observer(({ state, startIndex = 0, endIndex = 0 }) => {
+
     let stockData = state.stockData
+
+    if (startIndex || endIndex) {
+        stockData = stockData.slice(startIndex, endIndex)
+    }
 
     return <>
         <Input state={state.userInputState} />
