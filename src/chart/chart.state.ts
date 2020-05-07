@@ -1,6 +1,13 @@
 import { observable, action } from "mobx";
 import { InputState } from "../input/input";
-import { convertTimeSeries, EasyTimeSeries } from "../utils/general.utils";
+import {
+  convertTimeSeries,
+  createAlphaVantageRequestInfo,
+} from "../utils/general.utils";
+import {
+  EasyTimeSeries,
+  AlphaVantageConfig,
+} from "../interfaces/general.interfaces";
 
 export class ChartState {
   @observable
@@ -11,31 +18,24 @@ export class ChartState {
 
   @action
   fetchStock() {
-    const API_KEY: string = "KSNP9BPJV1U322DK";
-    const OUTPUT_SIZE: string = "compact"; // full
+    let config: AlphaVantageConfig = {
+      stockSymbol: this.userInputState.value,
+      // TODO: get from user
+      outputSize: "compact", // full
+      stockFunction: "TIME_SERIES_MONTHLY", // TIME_SERIES_INTRADAY
+    };
 
-    console.log("+++ this.userInputState", this.userInputState.value);
-
-    const STOCK_SYMBOL: string = this.userInputState.value;
-
-    const STOCK_FUNCTION: string = 'TIME_SERIES_MONTHLY' // TIME_SERIES_INTRADAY
-    // const API_CALL: string =
-    //     `https://www.alphavantage.co/query?function=FX_DAILY&from_symbol=EUR&to_symbol=USD&outputsize=${OUTPUT_SIZE}&apikey=${API_KEY}`
-    const API_CALL: string = `https://www.alphavantage.co/query?function=${STOCK_FUNCTION}&symbol=${STOCK_SYMBOL}&interval=5min&outputsize=${OUTPUT_SIZE}&apikey=${API_KEY}`;
-
-    fetch(API_CALL)
+    fetch(createAlphaVantageRequestInfo(config))
       .then((res) => {
         return res.json();
       })
       .then((data) => {
         if (data["Error Message"]) {
           console.warn("<!> Error");
+        } else {
+          let converted: EasyTimeSeries[] = convertTimeSeries(data);
+          this.stockData = converted;
         }
-        console.log("+++ original API data", data);
-
-        let converted: EasyTimeSeries[] = convertTimeSeries(data);
-        console.log('+++ converted', converted);
-        this.stockData = converted
       });
   }
 }

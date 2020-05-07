@@ -4,7 +4,6 @@ import { Input } from '../input/input'
 import { ChartState } from './chart.state'
 
 // TODO: replace with real data after filtering
-import { pricesMock } from '../mocks/prices.mock'
 import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts'
 /**
  * User provides a stock symbol
@@ -14,20 +13,21 @@ import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts'
  */
 export const Chart: React.FC<{ state: ChartState }> = observer(({ state }) => {
     let stockData = state.stockData
-    // let stockData = pricesMock.slice(1, 10)
-    console.log('+++ stockData', stockData);
 
     return <>
         <Input state={state.userInputState} />
         <button onClick={() => state.fetchStock()}>Fetch Stock Data</button>
 
-        <LineChart width={1000} height={300} data={stockData}>
-            <XAxis dataKey='date' />
-            <YAxis dataKey='price'/>
-            {/* <CartesianGrid stroke="#eee" strokeDasharray="5 5" /> */}
+        {stockData.length ?
+            <LineChart width={1000} height={300} data={stockData}>
+                <XAxis dataKey='date' />
+                <YAxis dataKey='price' />
+                {/* <CartesianGrid stroke="#eee" strokeDasharray="5 5" /> */}
 
-            <Line type="monotone" dataKey="date" stroke="#8884d8" />
-            <Line type="monotone" dataKey="price" stroke="#82ca9d" />
-        </LineChart>
+                <Line type="monotone" dataKey="date" stroke="#8884d8" />
+                <Line type="monotone" dataKey="price" stroke="#82ca9d" />
+            </LineChart>
+            : null
+        }
     </>
 })
