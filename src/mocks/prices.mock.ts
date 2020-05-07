@@ -251,4 +251,4 @@ export const pricesMock = [
     { date: 'Dec 28 2016', price: 116.76 },
     { date: 'Dec 29 2016', price: 116.73 },
     { date: 'Dec 30 2016', price: 115.82 },
-  ];
+];
