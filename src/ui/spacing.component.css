@@ -1,0 +1,15 @@
+.SpacingComponent__top {
+    margin-top: 32px;
+}
+
+.SpacingComponent__bottom {
+    margin-bottom: 32px;
+}
+
+.SpacingComponent__left {
+    margin-left: 32px;
+}
+
+.SpacingComponent__right {
+    margin-right: 32px;
+}

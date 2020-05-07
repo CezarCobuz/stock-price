@@ -4,6 +4,8 @@ import { observer } from 'mobx-react'
 import { Dropdown, DropdownState } from './dropdown';
 import { appState } from '../App';
 import { EasyTimeSeries } from '../interfaces/general.interfaces';
+import { SpacingComponent } from '../ui/spacing.component';
+import './date-interval.css'
 
 export class DateIntervalState {
     @observable
@@ -29,8 +31,6 @@ export class DateIntervalState {
     @action
     setDateInterval = (indexStart: number, indexStop: number) => {
         if (indexStart < indexStop) {
-            // FIXME: don't destroy original fetched stock data, refactor chart
-            // appState.chartState.stockData = appState.chartState.stockData.slice(indexStart, indexStop
             appState.startIndex = indexStart
             appState.endIndex = indexStop
         } else {
@@ -51,8 +51,16 @@ export const DateInterval: React.FC<{ state: DateIntervalState }> = observer(({ 
     return (
         <>
             <p>Select Date Interval</p>
-            <Dropdown state={startDropdownState} dates={startDates} />
-            <Dropdown state={stopDropdownState} dates={endDates} />
+            <SpacingComponent bottom>
+                <div className='DatesSelectorsContainer'>
+                    <Dropdown state={startDropdownState} dates={startDates} />
+                    <SpacingComponent left>
+                        <Dropdown state={stopDropdownState} dates={endDates} />
+                    </SpacingComponent>
+                </div>
+
+            </SpacingComponent>
+
 
             <button
                 onClick={() => state.setDateInterval(startDropdownState.valueIndex, stopDropdownState.valueIndex)}>

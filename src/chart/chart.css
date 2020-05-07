@@ -1,0 +1,10 @@
+.Chart {
+   background-color: aqua;
+}
+
+.SymbolContainer {
+    display: flex;
+    background-color: brown;
+    align-items: center;
+    justify-content: center;
+}
