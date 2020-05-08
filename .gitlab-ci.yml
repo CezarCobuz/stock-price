@@ -1,17 +1,23 @@
 image: node:12.10.0
 
-pages:
-cache:
-paths:
-- ./node_modules/
+stages:
+    - build
+    - deploy
 
-stage: deploy
-script:
-- npm install
-- npm run build
-- mv build/* public/
-artifacts:
-paths:
-- public
-only:
-- master
+build:
+    stage: build
+    script:
+    - yarn install
+    - yarn build
+
+    artifacts:
+        expire_in: 1 hour
+        paths:
+            - build
+
+deploy:
+    stage: deploy
+    script:
+        - build/* public/
+    only:
+        - master
