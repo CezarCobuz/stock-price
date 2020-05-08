@@ -1,13 +1,14 @@
-import React, { useEffect } from 'react';
 import './App.css';
 import './ui/button.css';
 
-import { observable } from 'mobx';
-import { observer } from 'mobx-react'
+import { DateInterval, DateIntervalState } from './date-interval/date-interval';
+import React, { useEffect } from 'react';
+
 import { Chart } from './chart/chart';
 import { ChartState } from './chart/chart.state';
-import { DateInterval, DateIntervalState } from './date-interval/date-interval';
 import { SpacingComponent } from './ui/spacing.component';
+import { observable } from 'mobx';
+import { observer } from 'mobx-react'
 
 class AppState {
     @observable
@@ -31,6 +32,7 @@ export const App: React.FC<{ state: AppState }> = observer(({ state }) => {
     useEffect(() => {
         state.chartState.userInputState.value = 'amzn'
         state.chartState.fetchStock()
+        // eslint-disable-next-line
     }, [])
 
     return (

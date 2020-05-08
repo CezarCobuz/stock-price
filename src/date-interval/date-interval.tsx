@@ -47,6 +47,7 @@ export const DateInterval: React.FC<{ state: DateIntervalState }> = observer(({ 
 
     useEffect(() => {
         state.filterDates(appState.chartState.stockData)
+        // eslint-disable-next-line
     }, [])
 
     let { startDropdownState, stopDropdownState, startDates, endDates } = state
