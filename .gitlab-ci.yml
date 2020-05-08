@@ -16,6 +16,6 @@ build:
 deploy:
   stage: deploy
   script:
-      - yarn run-script deploy
+      - mv build public
   only:
       - master
