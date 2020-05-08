@@ -16,7 +16,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - mv build/ public/
+    - mv build/* public/
 
   only:
     - master
