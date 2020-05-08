@@ -1,13 +1,13 @@
-import React from 'react'
-import { observer } from 'mobx-react'
-import { Input } from '../input/input'
-import { ChartState } from './chart.state'
-
-// TODO: replace with real data after filtering
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, ReferenceLine } from 'recharts'
-import { computeAveragePrice } from '../utils/general.utils'
 import './chart.css';
+
+import { CartesianGrid, Label, Line, LineChart, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts'
+
+import { ChartState } from './chart.state'
+import { Input } from '../input/input'
+import React from 'react'
 import { SpacingComponent } from '../ui/spacing.component'
+import { computeAveragePrice } from '../utils/general.utils'
+import { observer } from 'mobx-react'
 
 interface Props {
     state: ChartState,
@@ -33,7 +33,6 @@ export const Chart: React.FC<Props> = observer(({ state, startIndex = 0, endInde
 
     let averagePrice = computeAveragePrice(stockData)
 
-
     return (
         <div className='Chart'>
 
@@ -41,21 +40,21 @@ export const Chart: React.FC<Props> = observer(({ state, startIndex = 0, endInde
                 <div className='SymbolContainer'>
                     <Input state={state.userInputState} />
                     <SpacingComponent left>
-                        <button onClick={() => state.fetchStock()}>Fetch Stock Data</button>
+                        <button className='Button' onClick={() => state.fetchStock()}>Fetch Stock Data</button>
                     </SpacingComponent>
                 </div>
             </SpacingComponent>
-
-
 
             {stockData.length !== 0 &&
                 <LineChart width={1000} height={300} data={stockData}>
                     <XAxis dataKey='date' />
                     <YAxis dataKey='price' />
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="price" stroke="blue" />
+                    <Line type="monotone" dataKey="price" stroke="darkcyan" />
                     <Tooltip />
-                    <ReferenceLine y={averagePrice} label={`avg: ${averagePrice.toFixed(4)}`} stroke="coral" strokeDasharray='5 5' />
+                    <ReferenceLine y={averagePrice} stroke="sandybrown" strokeDasharray='5 10'>
+                        <Label value={`avg: ${averagePrice.toFixed(4)}`} position='insideLeft' fill='coral' fontWeight='bold' />
+                    </ReferenceLine>
                     {/* TODO: investigate xAxis tick formatter https://github.com/recharts/recharts/issues/1028 */}
                 </LineChart>
             }

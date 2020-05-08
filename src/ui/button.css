@@ -1,0 +1,15 @@
+.Button {
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.Button:hover {
+  background-color: dodgerblue;
+}

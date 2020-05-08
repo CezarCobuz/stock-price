@@ -1,7 +1,9 @@
-import { observable, action } from 'mobx'
+import './dropdown.css';
+
+import { action, observable } from 'mobx'
+
 import React from 'react'
 import { observer } from 'mobx-react'
-import { appState } from '../App';
 
 export class DropdownState {
     @observable
@@ -20,7 +22,7 @@ export class DropdownState {
 export const Dropdown: React.FC<{ state: DropdownState, dates: string[] }> = observer(({ state, dates }) => {
     return (
         <div>
-            <select id="date"
+            <select className='Dropdown' id="date"
                 onChange={e => state.onChange(e.target.value, e.target.selectedIndex)}
                 value={state.value}>
                 {

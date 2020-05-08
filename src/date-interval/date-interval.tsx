@@ -1,11 +1,14 @@
-import { observable, action } from 'mobx'
-import React, { useEffect } from 'react'
-import { observer } from 'mobx-react'
+import './date-interval.css'
+import '../ui/button.css'
+
 import { Dropdown, DropdownState } from './dropdown';
-import { appState } from '../App';
+import React, { useEffect } from 'react'
+import { action, observable } from 'mobx'
+
 import { EasyTimeSeries } from '../interfaces/general.interfaces';
 import { SpacingComponent } from '../ui/spacing.component';
-import './date-interval.css'
+import { appState } from '../App';
+import { observer } from 'mobx-react'
 
 export class DateIntervalState {
     @observable
@@ -50,8 +53,7 @@ export const DateInterval: React.FC<{ state: DateIntervalState }> = observer(({ 
 
     return (
         <>
-            <p>Select Date Interval</p>
-            <SpacingComponent bottom>
+            <SpacingComponent vertical>
                 <div className='DatesSelectorsContainer'>
                     <Dropdown state={startDropdownState} dates={startDates} />
                     <SpacingComponent left>
@@ -63,6 +65,7 @@ export const DateInterval: React.FC<{ state: DateIntervalState }> = observer(({ 
 
 
             <button
+                className='Button'
                 onClick={() => state.setDateInterval(startDropdownState.valueIndex, stopDropdownState.valueIndex)}>
                 Filter Date Interval
             </button>

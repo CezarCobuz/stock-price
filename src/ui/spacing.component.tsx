@@ -1,5 +1,6 @@
-import React from 'react'
 import './spacing.component.css';
+
+import React from 'react'
 
 const getCustomClassNames = (
     top?: boolean,
@@ -30,32 +31,32 @@ const getCustomClassNames = (
         result += 'SpacingComponent__right'
     }
 
-    console.log('+++ result', result);
     return result
 }
-
-export const SpacingComponent: React.FC<{
+interface Props {
+    children: React.ReactNode,
     top?: boolean,
     bottom?: boolean,
     vertical?: boolean,
     left?: boolean,
     right?: boolean,
     horizontal?: boolean,
-}> =
-    (props) => {
-        return (
-            <div className={
-                getCustomClassNames(
-                    props.top,
-                    props.bottom,
-                    props.vertical,
-                    props.left,
-                    props.right,
-                    props.horizontal
-                )}>
+}
 
-                {props.children}
+export const SpacingComponent: React.FC<Props> = (props: Props) => {
+    return (
+        <div className={
+            getCustomClassNames(
+                props.top,
+                props.bottom,
+                props.vertical,
+                props.left,
+                props.right,
+                props.horizontal
+            )}>
 
-            </div>
-        )
-    }
+            {props.children}
+
+        </div>
+    )
+}
