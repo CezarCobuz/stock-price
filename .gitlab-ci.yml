@@ -5,17 +5,18 @@ stages:
 
 cache:
   paths:
-  - node_modules/
+    - node_modules/
 
 build:
   stage: build
   script:
-  - yarn install
-  - yarn build
+    - yarn install
+    - yarn build
 
 deploy:
   stage: deploy
   script:
-      - mv build public
+    - mv build/ public/
+
   only:
-      - master
+    - master
