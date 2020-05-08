@@ -1,0 +1,17 @@
+image: node:12.10.0
+
+pages:
+cache:
+paths:
+- ./node_modules/
+
+stage: deploy
+script:
+- npm install
+- npm run build
+- mv build/* public/
+artifacts:
+paths:
+- public
+only:
+- master
