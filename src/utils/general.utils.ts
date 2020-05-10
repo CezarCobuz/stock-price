@@ -1,6 +1,6 @@
 import {
-    EasyTimeSeries,
     AlphaVantageConfig,
+    EasyTimeSeries,
 } from "../interfaces/general.interfaces";
 
 /** @param data as received from alphavantage API  */
@@ -29,7 +29,7 @@ export const createAlphaVantageRequestInfo = (
     config: AlphaVantageConfig
 ): string => {
     const PROVIDER = "https://www.alphavantage.co/";
-    const API_KEY = "KSNP9BPJV1U322DK";
+    const API_KEY = "KSNP9BPJV1U322DK"; // devbackup: J4Z86NMG30HH5AJ3 //TODO: cycle through this APIS
 
     const { outputSize, stockSymbol, stockFunction } = config;
 

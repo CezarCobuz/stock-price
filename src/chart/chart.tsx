@@ -8,6 +8,7 @@ import React from 'react'
 import { SpacingComponent } from '../ui/spacing.component'
 import { computeAveragePrice } from '../utils/general.utils'
 import { observer } from 'mobx-react'
+import { useWindowDimensions } from '../utils/dimensions.utils';
 
 interface Props {
     state: ChartState,
@@ -33,6 +34,8 @@ export const Chart: React.FC<Props> = observer(({ state, startIndex = 0, endInde
 
     let averagePrice = computeAveragePrice(stockData)
 
+    const {height, width} = useWindowDimensions()
+
     return (
         <div className='Chart'>
 
@@ -46,7 +49,7 @@ export const Chart: React.FC<Props> = observer(({ state, startIndex = 0, endInde
             </SpacingComponent>
 
             {stockData.length !== 0 &&
-                <LineChart width={1000} height={300} data={stockData}>
+                <LineChart width={width * 0.8} height={height * 0.5} data={stockData}>
                     <XAxis dataKey='date' />
                     <YAxis dataKey='price' />
                     <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
